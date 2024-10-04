@@ -1,7 +1,17 @@
 package com.example.coffemachine
 
+data class CoffeeDetails (
+    val coffeeType: String,
+    val sugarCount: Int,
+    val name: String,
+    val size: String,
+    val creamAmount: Int,
+
+)
+
 fun main () {
-    serveCoffee()
+    val coffeeForTom = CoffeeDetails("Cappuccino", 0, "Tom", "Regular", 0)
+    makeCoffee(coffeeForTom)
 }
 
 fun serveCoffee() {
@@ -33,17 +43,17 @@ fun serveCoffee() {
         return
     }
 
-    makeCoffee(coffeeType, sugarCount, person)
+//    makeCoffee(coffeeType, sugarCount, person)
 }
 
-fun makeCoffee(coffeeType: String, sugarCount: Int, name: String) {
-    val sugarDescription = when (sugarCount) {
+fun makeCoffee(coffeeDetails: CoffeeDetails) {
+    val sugarDescription = when (coffeeDetails.sugarCount) {
         0 -> "no sugar"
         1 -> "1 spoon of sugar"
-        in 2..Int.MAX_VALUE -> "$sugarCount spoons of sugar"
+        in 2..Int.MAX_VALUE -> "${coffeeDetails.sugarCount} spoons of sugar"
         else -> "an invalid amount of sugar"
     }
 
     // Print the coffee preparation details
-    println("Serving a $coffeeType with $sugarDescription for $name.")
+    println("Serving a ${coffeeDetails.coffeeType} with $sugarDescription for ${coffeeDetails.name}.")
 }
